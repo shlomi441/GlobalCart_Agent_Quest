@@ -3,7 +3,10 @@
 > Three specialist agents, two code nodes, and no way back. The model narrates; the code records.
 
 *** Tested on Anthropic's Sonnet and Haiku models, and the agents should work seamlessly with any stronger/weaker model with no issues ***
-*** Working with any non-Anthropic models requires a few modifications to the code around calling the Anthropic API ***
+
+
+*** Working with any non-Anthropic models requires a few modifications to the code around calling the Anthropic API.
+This project is not bounded to any specific model.***
 
 Stage 1 shipped one Operations Resolver Agent. Stage 2 splits its job across a crew:
 a **Researcher & Fraud Auditor**, a **Decision Maker**, and a **Communications &
@@ -517,26 +520,6 @@ mutation crews (each caught): a wrong decision claim, a fabricated citation, a
 dishonest tool self-report, a leaked reply, an over-eager alert on a clean case, the
 $52→$50 shave, and an under-eager comms agent. Writing it caught two mistakes of our
 own (incidents 6 and 14), which is the point.
-
-### 5.4 Compatibility matrix
-
-From `tests/reports/` (regenerate with `python tests/run_scenarios.py --runs 2`):
-
-| Model | `OUTPUT_MODE` | Scenario runs | Passed | Retries | Lock corrections | Backstops | Notes |
-|---|---|---|---|---|---|---|---|
-| claude-sonnet-5 | text_json | 18 × 1 | **18/18** | 1 | 0 | 0 | after incidents 8–9 (earlier 16/18, both suite/schema bugs, the crew's outcomes were 18/18 throughout) |
-| claude-haiku-4-5 | text_json | 18 × 2 | **36/36** | 3 | 1 | 2 | every retry was the same pattern: the comms agent narrates its steps in markdown at its final turn (incident 16) |
-| claude-haiku-4-5 | tool | 18 × 2 | **36/36** | **0** | 3 | 2 | the finish-tool removes the narration pattern entirely |
-
-Earlier Haiku passes: 16/18 (two crew crashes on an empty `tool_use` turn, incident
-11, fixed) and 16/18 (a stale checker and a skipped audit, incidents 14–15, fixed).
-Across the five full passes (126 scenario runs) the only wrong results were the two
-crashes (ours) and one shape difference caused by the skipped audit (now backstopped);
-every other failure was in the suite or the schemas, never in a decision.
-
-**Recommendation:** `MODEL=claude-sonnet-5` with the default `OUTPUT_MODE=text_json`,
-or `MODEL=claude-haiku-4-5` with `OUTPUT_MODE=tool`. Both are validated across the
-full suite; nothing in the crew assumes a model.
 
 ---
 
