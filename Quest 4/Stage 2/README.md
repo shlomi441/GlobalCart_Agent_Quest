@@ -93,7 +93,8 @@ alert, the customer reply and the crew's notes. Useful flags:
 |---|---|
 | `--save runs/name.txt` | write the audit view to that file and the full result to `runs/name.txt.json` (UTF-8) |
 | `--verbose` | print every tool call as it happens |
-| `--model claude-haiku-4-5` / `--mode tool` | override the model / the final-answer mode for this run |
+| `--model claude-haiku-4-5` | override the model |
+| `--mode tool` | optional mode to run an extra tool to refine the final answer. NOT MANDATORY, a valid and refined final answer is given regardless of this tool's activation. 
 | `--no-remember` | do not record the run in the long-term ledger (see note below) |
 | `--mermaid` | print the graph diagram, generated from the compiled code, and exit |
 
