@@ -1,0 +1,84 @@
+{
+  "_comment": "GlobalCart fraud detection rulebook (mock). Read-only fixture for Quest #04 Part B. Do not edit.",
+  "version": "1.0.0",
+  "scoring": {
+    "method": "additive_weights",
+    "max_score": 100,
+    "_note": "Each triggered rule contributes its weight. The sum is capped at 100 and mapped to a risk band."
+  },
+  "risk_bands": [
+    { "band": "low", "min_score": 0, "max_score": 29, "action_hint": "proceed with the normal refund flow" },
+    { "band": "medium", "min_score": 30, "max_score": 59, "action_hint": "proceed, but attach the risk report to the decision" },
+    { "band": "high", "min_score": 60, "max_score": 100, "action_hint": "block the automatic refund and escalate to the security channel" }
+  ],
+  "rules": [
+    {
+      "rule_id": "FR-01",
+      "name": "repeat_refund_claims",
+      "description": "Three or more refund claims opened by the same customer within the trailing 60 days.",
+      "weight": 25,
+      "params": { "min_claims": 3, "window_days": 60 },
+      "signal_source": "users.json -> refund_history"
+    },
+    {
+      "rule_id": "FR-02",
+      "name": "last_minute_address_change",
+      "description": "The shipping address was changed within 7 days before the delivery date. A classic re-route pattern.",
+      "weight": 20,
+      "params": { "days_before_delivery": 7 },
+      "signal_source": "orders.json -> address_changed_at"
+    },
+    {
+      "rule_id": "FR-03",
+      "name": "new_account_high_value",
+      "description": "Account is less than 30 days old and the order total is 500 USD or more.",
+      "weight": 20,
+      "params": { "max_account_age_days": 30, "min_order_total_usd": 500.0 },
+      "signal_source": "users.json -> account_created_at, orders.json -> total_amount"
+    },
+    {
+      "rule_id": "FR-04",
+      "name": "prior_fraud_flag",
+      "description": "The customer record already carries at least one fraud flag from a previous investigation.",
+      "weight": 15,
+      "params": { "min_flags": 1 },
+      "signal_source": "users.json -> prior_fraud_flags"
+    },
+    {
+      "rule_id": "FR-05",
+      "name": "high_initial_fraud_score",
+      "description": "The risk score inherited from the upstream scoring service is 60 or above.",
+      "weight": 15,
+      "params": { "min_score": 60 },
+      "signal_source": "users.json -> initial_fraud_score"
+    },
+    {
+      "rule_id": "FR-06",
+      "name": "high_value_claim",
+      "description": "The order total is at or above 500 USD, ten times the standard automatic refund cap.",
+      "weight": 10,
+      "params": { "min_order_total_usd": 500.0 },
+      "signal_source": "orders.json -> total_amount"
+    },
+    {
+      "rule_id": "FR-07",
+      "name": "item_never_arrived_claim",
+      "description": "The claim is that an item is missing from a delivered order. Unverifiable from the courier record and therefore a common abuse vector.",
+      "weight": 10,
+      "params": { "condition": "missing" },
+      "signal_source": "orders.json -> items[].condition"
+    },
+    {
+      "rule_id": "FR-08",
+      "name": "refund_amount_velocity",
+      "description": "The customer has been refunded 250 USD or more in total within the trailing 60 days.",
+      "weight": 15,
+      "params": { "min_total_usd": 250.0, "window_days": 60 },
+      "signal_source": "users.json -> refund_history"
+    }
+  ],
+  "auto_block_conditions": [
+    { "condition": "risk_band == 'high'", "action": "block_automatic_refund_and_escalate" },
+    { "condition": "FR-04 triggered", "action": "always_attach_security_channel" }
+  ]
+}

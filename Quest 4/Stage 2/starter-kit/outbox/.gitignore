@@ -1,0 +1,3 @@
+# send_slack_alert() writes alerts.jsonl here. Keep the directory, ignore the
+# contents — your alert log is a run artifact, not source.
+alerts.jsonl

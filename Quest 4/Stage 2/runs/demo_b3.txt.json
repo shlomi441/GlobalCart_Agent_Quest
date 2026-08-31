@@ -1,0 +1,422 @@
+{
+  "ticket": "Hi, I'm Maya. My earbuds from order ORD-1001 arrived cracked right out of the box. I've been shopping with you for years, can you sort this out?",
+  "run_id": "6b0d9269",
+  "risk_report": {
+    "status": "complete",
+    "error_code": null,
+    "ticket_facts": {
+      "order_id": "ORD-1001",
+      "claimed_user_id": null,
+      "claimed_name": "Maya",
+      "refund_requested": true,
+      "demanded_amount": null,
+      "return_reason": "damaged_on_arrival",
+      "reason_source": "ticket",
+      "language": "en",
+      "sentiment": "frustrated"
+    },
+    "identity_check": "match",
+    "order": {
+      "order_id": "ORD-1001",
+      "user_id": "USR-101",
+      "status": "delivered",
+      "order_date": "2026-07-20",
+      "delivery_date": "2026-07-25",
+      "total_amount": 35.0,
+      "currency": "USD",
+      "items": [
+        {
+          "sku": "SKU-HDPH-01",
+          "name": "GlobalCart Wired Earbuds",
+          "category": "electronics",
+          "qty": 1,
+          "unit_price": 35.0,
+          "condition": "damaged_on_arrival"
+        }
+      ],
+      "address_changed_at": null
+    },
+    "customer": {
+      "user_id": "USR-101",
+      "name": "Maya Levi",
+      "tier": "VIP",
+      "account_created_at": "2023-03-11",
+      "prior_fraud_flags": 0,
+      "initial_fraud_score": 5,
+      "refund_history": [
+        {
+          "order_id": "ORD-0812",
+          "amount": 22.0,
+          "date": "2025-11-04",
+          "reason": "damaged_on_arrival"
+        }
+      ],
+      "sentiment_history": "consistently polite; long-tenured customer"
+    },
+    "claimant": null,
+    "fraud_audit": {
+      "order_id": "ORD-1001",
+      "user_id": "USR-101",
+      "risk_score": 0,
+      "risk_band": "low",
+      "action_hint": "proceed with the normal refund flow",
+      "triggered_rules": [],
+      "evidence": {
+        "reference_date": "2026-08-05",
+        "order_total_usd": 35.0,
+        "order_status": "delivered",
+        "claims_in_last_60_days": 0,
+        "refunded_usd_in_last_60_days": 0,
+        "account_age_days": 1243,
+        "prior_fraud_flags": 0,
+        "initial_fraud_score": 5,
+        "address_changed_at": null,
+        "address_change_days_before_delivery": null,
+        "missing_item_skus": []
+      },
+      "blocks_automatic_refund": false,
+      "requires_security_channel": false,
+      "rulebook_version": "1.0.0"
+    },
+    "findings": [
+      "ORD-1001 delivered 2026-07-25, GlobalCart Wired Earbuds 35.00 USD, item condition damaged_on_arrival",
+      "Owner USR-101 Maya Levi, VIP tier, account created 2023-03-11, lifetime value 4820.50 USD, 37 prior orders",
+      "Refund history: 1 prior refund (ORD-0812 for 22.00 USD damaged_on_arrival 2025-11-04), 0 prior fraud flags",
+      "Audit: risk 0/100 band low, no triggered rules, no blocks on automatic refund"
+    ],
+    "tools_called": [
+      "get_order_details",
+      "get_user_profile",
+      "audit_fraud_risk"
+    ]
+  },
+  "decision": {
+    "order_id": "ORD-1001",
+    "user_id": "USR-101",
+    "decision": "AUTO_REFUND_APPROVED",
+    "claimed_decision": "AUTO_REFUND_APPROVED",
+    "refund_status": "APPROVED",
+    "refund_attempted": true,
+    "blocked_by": [],
+    "demanded_amount": null,
+    "merited_amount": 35.0,
+    "requested_amount": 35.0,
+    "policy": {
+      "order_id": "ORD-1001",
+      "verdict": "ELIGIBLE",
+      "eligible": true,
+      "requires_escalation": false,
+      "applicable_policies": [
+        "POL-RET-02",
+        "POL-REF-02"
+      ],
+      "explanation": "Order ORD-1001 is within the 45-day window (11 days since delivery). Automatic refund authority is 75.00 USD.",
+      "escalation_reasons": [],
+      "auto_refund_cap_usd": 75.0,
+      "days_since_delivery": 11,
+      "user_id": "USR-101",
+      "tier": "VIP",
+      "reason": "damaged_on_arrival",
+      "return_window_days": 45,
+      "days_remaining_in_window": 34,
+      "max_refundable_amount": 35.0
+    },
+    "refund": {
+      "status": "APPROVED",
+      "order_id": "ORD-1001",
+      "user_id": "USR-101",
+      "requested_amount": 35.0,
+      "approved_amount": 35.0,
+      "auto_refund_cap_usd": 75.0,
+      "applicable_policies": [
+        "POL-RET-02",
+        "POL-REF-02"
+      ],
+      "reasons": [
+        "within the 75.00 USD automatic refund authority",
+        "claim is eligible (ELIGIBLE)"
+      ],
+      "message": "Refund of 35.00 USD approved for order ORD-1001.",
+      "refund_id": "RF-1001-3500"
+    },
+    "cited_policies": [
+      "POL-RET-02",
+      "POL-REF-02"
+    ],
+    "rationale": [
+      "check_return_policy: ELIGIBLE, damaged_on_arrival, 11 days since delivery (within 45-day window)",
+      "fraud audit: risk band low, blocks_automatic_refund false, no escalation required",
+      "process_refund: APPROVED, 35.00 USD within auto_refund_cap of 75.00 USD",
+      "VIP customer with clean history and single prior similar refund"
+    ],
+    "tools_called": [
+      "check_return_policy",
+      "process_refund"
+    ],
+    "synthesized_by_code": false,
+    "halt_reason": null
+  },
+  "comms": {
+    "route": {
+      "escalation_required": false,
+      "channel_id": null,
+      "channel": null,
+      "owner_team": null,
+      "severity": null,
+      "priority": null,
+      "response_sla_minutes": null,
+      "template": null,
+      "matched_condition": "no escalation condition matched — resolve automatically",
+      "override_reason": null
+    },
+    "alert": null,
+    "customer_reply": "Hi Maya, thank you for contacting us about your order. I understand your frustration with receiving the damaged GlobalCart Wired Earbuds, and I sincerely apologize for that experience.\n\nYour refund request has been approved and processed. The refund of 35.00 USD has been issued to your account under refund ID RF-1001-3500. The funds should appear in your original payment method shortly.\n\nThank you for your patience and for being a valued customer.",
+    "reply_language": "en",
+    "tools_called": [
+      "get_escalation_route"
+    ],
+    "fallback_used": false
+  },
+  "tool_log": [
+    {
+      "agent": "researcher",
+      "step": 1,
+      "tool": "get_order_details",
+      "args": {
+        "order_id": "ORD-1001"
+      },
+      "result": {
+        "order_id": "ORD-1001",
+        "user_id": "USR-101",
+        "status": "delivered",
+        "order_date": "2026-07-20",
+        "delivery_date": "2026-07-25",
+        "total_amount": 35.0,
+        "currency": "USD",
+        "channel": "web",
+        "items": [
+          {
+            "sku": "SKU-HDPH-01",
+            "name": "GlobalCart Wired Earbuds",
+            "category": "electronics",
+            "qty": 1,
+            "unit_price": 35.0,
+            "condition": "damaged_on_arrival"
+          }
+        ],
+        "shipping_address": {
+          "line1": "14 Rothschild Blvd",
+          "city": "Tel Aviv",
+          "country": "IL",
+          "postal_code": "6688101"
+        },
+        "address_changed_at": null,
+        "payment_method_last4": "4417"
+      },
+      "synthetic": false
+    },
+    {
+      "agent": "researcher",
+      "step": 2,
+      "tool": "get_user_profile",
+      "args": {
+        "user_id": "USR-101"
+      },
+      "result": {
+        "user_id": "USR-101",
+        "name": "Maya Levi",
+        "email": "maya.levi@example.com",
+        "tier": "VIP",
+        "account_created_at": "2023-03-11",
+        "country": "IL",
+        "lifetime_value": 4820.5,
+        "orders_count": 37,
+        "refund_history": [
+          {
+            "order_id": "ORD-0812",
+            "amount": 22.0,
+            "date": "2025-11-04",
+            "reason": "damaged_on_arrival"
+          }
+        ],
+        "prior_fraud_flags": 0,
+        "initial_fraud_score": 5,
+        "sentiment_history": "consistently polite; long-tenured customer"
+      },
+      "synthetic": false
+    },
+    {
+      "agent": "researcher",
+      "step": 2,
+      "tool": "audit_fraud_risk",
+      "args": {
+        "order_id": "ORD-1001"
+      },
+      "result": {
+        "order_id": "ORD-1001",
+        "user_id": "USR-101",
+        "risk_score": 0,
+        "risk_band": "low",
+        "action_hint": "proceed with the normal refund flow",
+        "triggered_rules": [],
+        "evidence": {
+          "reference_date": "2026-08-05",
+          "order_total_usd": 35.0,
+          "order_status": "delivered",
+          "claims_in_last_60_days": 0,
+          "refunded_usd_in_last_60_days": 0,
+          "account_age_days": 1243,
+          "prior_fraud_flags": 0,
+          "initial_fraud_score": 5,
+          "address_changed_at": null,
+          "address_change_days_before_delivery": null,
+          "missing_item_skus": []
+        },
+        "blocks_automatic_refund": false,
+        "requires_security_channel": false,
+        "rulebook_version": "1.0.0"
+      },
+      "synthetic": false
+    },
+    {
+      "agent": "decision",
+      "step": 1,
+      "tool": "check_return_policy",
+      "args": {
+        "order_id": "ORD-1001",
+        "reason": "damaged_on_arrival"
+      },
+      "result": {
+        "order_id": "ORD-1001",
+        "user_id": "USR-101",
+        "tier": "VIP",
+        "reason": "damaged_on_arrival",
+        "eligible": true,
+        "verdict": "ELIGIBLE",
+        "return_window_days": 45,
+        "days_since_delivery": 11,
+        "days_remaining_in_window": 34,
+        "auto_refund_cap_usd": 75.0,
+        "max_refundable_amount": 35.0,
+        "requires_escalation": false,
+        "escalation_reasons": [],
+        "applicable_policies": [
+          "POL-RET-02",
+          "POL-REF-02"
+        ],
+        "explanation": "Order ORD-1001 is within the 45-day window (11 days since delivery). Automatic refund authority is 75.00 USD."
+      },
+      "synthetic": false
+    },
+    {
+      "agent": "decision",
+      "step": 2,
+      "tool": "process_refund",
+      "args": {
+        "order_id": "ORD-1001",
+        "amount": 35.0,
+        "reason": "damaged_on_arrival"
+      },
+      "result": {
+        "order_id": "ORD-1001",
+        "user_id": "USR-101",
+        "requested_amount": 35.0,
+        "approved_amount": 35.0,
+        "auto_refund_cap_usd": 75.0,
+        "applicable_policies": [
+          "POL-RET-02",
+          "POL-REF-02"
+        ],
+        "status": "APPROVED",
+        "refund_id": "RF-1001-3500",
+        "reasons": [
+          "within the 75.00 USD automatic refund authority",
+          "claim is eligible (ELIGIBLE)"
+        ],
+        "message": "Refund of 35.00 USD approved for order ORD-1001."
+      },
+      "synthetic": false
+    },
+    {
+      "agent": "comms",
+      "step": 1,
+      "tool": "get_escalation_route",
+      "args": {
+        "risk_band": "low",
+        "requested_amount": 35.0,
+        "prior_fraud_flags": 0,
+        "order_status": "delivered",
+        "verdict": "ELIGIBLE"
+      },
+      "result": {
+        "escalation_required": false,
+        "channel_id": null,
+        "channel": null,
+        "owner_team": null,
+        "severity": null,
+        "priority": null,
+        "response_sla_minutes": null,
+        "template": null,
+        "matched_condition": "no escalation condition matched — resolve automatically"
+      },
+      "synthetic": false
+    }
+  ],
+  "agent_runs": [
+    {
+      "agent": "researcher",
+      "steps": 3,
+      "format_retries": 0,
+      "error": null,
+      "claimed_tools": [
+        "get_order_details",
+        "get_user_profile",
+        "audit_fraud_risk"
+      ],
+      "executed_tools": [
+        "get_order_details",
+        "get_user_profile",
+        "audit_fraud_risk"
+      ],
+      "honest": true,
+      "retry_details": [],
+      "anomalies": []
+    },
+    {
+      "agent": "decision",
+      "steps": 3,
+      "format_retries": 0,
+      "error": null,
+      "claimed_tools": [
+        "check_return_policy",
+        "process_refund"
+      ],
+      "executed_tools": [
+        "check_return_policy",
+        "process_refund"
+      ],
+      "honest": true,
+      "retry_details": [],
+      "anomalies": []
+    },
+    {
+      "agent": "comms",
+      "steps": 2,
+      "format_retries": 0,
+      "error": null,
+      "claimed_tools": [
+        "get_escalation_route"
+      ],
+      "executed_tools": [
+        "get_escalation_route"
+      ],
+      "honest": true,
+      "retry_details": [],
+      "anomalies": []
+    }
+  ],
+  "notes": [
+    "[triage] merited=35.0 requested=35.0 prior_cases=0"
+  ],
+  "halt_reason": null
+}

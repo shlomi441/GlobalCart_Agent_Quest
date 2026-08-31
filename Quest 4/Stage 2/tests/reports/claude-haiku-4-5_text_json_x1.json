@@ -1,0 +1,1634 @@
+{
+  "model": "claude-haiku-4-5",
+  "mode": "text_json",
+  "runs": 1,
+  "started": "2026-08-29T11:35:34+00:00",
+  "scenarios": {
+    "1": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "AUTO_REFUND_APPROVED",
+          "refund_status": "APPROVED",
+          "blocked_by": [],
+          "claimed_decision": "AUTO_REFUND_APPROVED",
+          "route": null,
+          "override": null,
+          "alert": null,
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "decision.process_refund",
+            "comms.get_escalation_route"
+          ],
+          "customer_reply": "Hi Maya, thank you for reporting the damaged earbuds. I'm sorry your GlobalCart Wired Earbuds arrived damaged. Your refund of 35.00 USD has been approved and processed. Your refund ID is RF-1001-3500. You should see the credit back to your account within 3-5 business days. Thank you for your patience, and please let us know if there's anything else we can help with.",
+          "notes": [
+            "[triage] merited=35.0 requested=35.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1001 delivered 2026-07-25, GlobalCart Wired Earbuds 35.00 USD, item condition damaged_on_arrival",
+              "[researcher] owner USR-101 Maya Levi, VIP tier, 0 prior fraud flags, 1 refund in history (22.00 USD damaged_on_arrival 2025-11-04)",
+              "[researcher] account created 2023-03-11, lifetime value 4820.50 USD across 37 orders, consistently polite",
+              "[researcher] audit: risk 0/100 band low, no triggered rules, does not block automatic refund",
+              "[decision] check_return_policy: ELIGIBLE (damaged_on_arrival, 11 days since delivery within 45-day window); requires_escalation false",
+              "[decision] fraud_audit: risk 0/100 low band, blocks_automatic_refund false, no security escalation required",
+              "[decision] prior_cases: empty, no duplicate claim",
+              "[decision] process_refund: APPROVED 35.00 USD (within 75.00 USD auto-refund cap); refund_id RF-1001-3500"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "process_refund",
+                "get_escalation_route"
+              ],
+              "decision": "AUTO_REFUND_APPROVED",
+              "refund_amount": 35.0,
+              "refund_id": "RF-1001-3500"
+            },
+            "customer_response": "Hi Maya, thank you for reporting the damaged earbuds. I'm sorry your GlobalCart Wired Earbuds arrived damaged. Your refund of 35.00 USD has been approved and processed. Your refund ID is RF-1001-3500. You should see the credit back to your account within 3-5 business days. Thank you for your patience, and please let us know if there's anything else we can help with."
+          }
+        },
+        "elapsed_s": 19.9
+      }
+    ],
+    "2": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "ESCALATED_TO_HUMAN",
+          "refund_status": "ESCALATION_REQUIRED",
+          "blocked_by": [],
+          "claimed_decision": "ESCALATED_TO_HUMAN",
+          "route": "CH-SUPPORT-T2",
+          "override": null,
+          "alert": {
+            "channel": "CH-SUPPORT-T2",
+            "severity": "medium",
+            "message_ts": "20260805.224105"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "decision.process_refund",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Daniel, I'm sorry to hear your Espresso Machine arrived damaged. I understand how frustrating that is. I've reviewed your request for a 150.00 USD refund for order ORD-1002, which was delivered on July 22nd, 2026. Your claim is valid and within our return window, and I'm escalating it to our specialist team for review. We'll follow up with you directly with next steps.",
+          "notes": [
+            "[triage] merited=150.0 requested=150.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1002 delivered 2026-07-22, espresso machine 150.00 USD, item condition damaged_on_arrival",
+              "[researcher] owner USR-102 Daniel Peretz, Standard tier, account age 702 days, 0 prior fraud flags, no refunds in history",
+              "[researcher] audit: risk 0/100 band low, no triggered rules, does not block automatic refund",
+              "[decision] check_return_policy: ELIGIBLE (damaged_on_arrival, 14 days since delivery, within 30-day window); POL-RET-01, POL-REF-01",
+              "[decision] fraud audit: risk 0/100 low, does not block automatic refund",
+              "[decision] process_refund: 150.00 USD merited amount exceeds auto_refund_cap of 50.00 USD; ESCALATION_REQUIRED per POL-REF-01/POL-REF-02",
+              "[decision] no automatic refund issued; human must authorize the full 150.00 USD claim"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "process_refund",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "ESCALATED_TO_HUMAN",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Daniel, I'm sorry to hear your Espresso Machine arrived damaged. I understand how frustrating that is. I've reviewed your request for a 150.00 USD refund for order ORD-1002, which was delivered on July 22nd, 2026. Your claim is valid and within our return window, and I'm escalating it to our specialist team for review. We'll follow up with you directly with next steps."
+          }
+        },
+        "elapsed_s": 24.2
+      }
+    ],
+    "3": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "REJECTED",
+          "refund_status": "REJECTED",
+          "blocked_by": [
+            "policy:verdict:OUTSIDE_RETURN_WINDOW"
+          ],
+          "claimed_decision": "REJECTED",
+          "route": "CH-SUPPORT-T2",
+          "override": null,
+          "alert": {
+            "channel": "CH-SUPPORT-T2",
+            "severity": "medium",
+            "message_ts": "20260805.050679"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Noa, thank you for reaching out about your order ORD-1003. I understand you'd like to return the GlobalCart Commuter Backpack (42.50 USD). Unfortunately, your order was delivered on June 6, 2026, and the return window for this item is 30 days from delivery. Since 60 days have now passed, we're unable to process a refund under our standard return policy. If you believe there's an issue with the product itself, our support team is reviewing your case and will follow up with you if there are any options available.",
+          "notes": [
+            "[triage] merited=42.5 requested=42.5 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1003 ordered 2026-05-30, delivered 2026-06-06, GlobalCart Commuter Backpack 42.50 USD, condition new",
+              "[researcher] owner USR-103 Noa Bar-On, Standard tier, no prior fraud flags, 1 refund in history (wrong_item, 18.50 USD)",
+              "[researcher] audit: risk 0/100 band low, no triggered rules, does not block automatic refund",
+              "[researcher] ticket does not provide customer name or id, so identity cannot be verified",
+              "[decision] check_return_policy: NOT ELIGIBLE, reason changed_mind is outside the 30-day return window (60 days since delivery per POL-RET-01)",
+              "[decision] no fraud blocks present (risk_band low, blocks_automatic_refund false)",
+              "[decision] return window expired; claim cannot proceed to refund",
+              "[decision] no refund processed"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "REJECTED",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Noa, thank you for reaching out about your order ORD-1003. I understand you'd like to return the GlobalCart Commuter Backpack (42.50 USD). Unfortunately, your order was delivered on June 6, 2026, and the return window for this item is 30 days from delivery. Since 60 days have now passed, we're unable to process a refund under our standard return policy. If you believe there's an issue with the product itself, our support team is reviewing your case and will follow up with you if there are any options available."
+          }
+        },
+        "elapsed_s": 19.7
+      }
+    ],
+    "4": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "REJECTED",
+          "refund_status": "REJECTED",
+          "blocked_by": [
+            "policy:verdict:NON_RETURNABLE_CATEGORY"
+          ],
+          "claimed_decision": "REJECTED",
+          "route": "CH-SUPPORT-T2",
+          "override": null,
+          "alert": {
+            "channel": "CH-SUPPORT-T2",
+            "severity": "medium",
+            "message_ts": "20260805.800964"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Avi, thank you for contacting us about order ORD-1008. I understand you'd like to return the GlobalCart Digital Gift Card ($29.99). Unfortunately, digital gift cards are non-returnable items and cannot be refunded, regardless of the reason. This is outlined in our return policy to protect both our customers and our digital product inventory. Since the order has already been delivered, the next step would be to use or gift the card to someone else. If you have any questions about how to use or transfer your gift card, please let us know and we'll be happy to help.",
+          "notes": [
+            "[triage] merited=29.99 requested=29.99 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1008 delivered 2026-07-30, GlobalCart Digital Gift Card 29.99 USD, digital goods, condition new",
+              "[researcher] Owner USR-107 Avi Gordon, VIP tier, account age 1349 days, lifetime value 7310.00 USD, 1 prior refund on record, 0 fraud flags",
+              "[researcher] Audit: risk score 0/100, risk band low, no rules triggered, does not block automatic refund",
+              "[decision] check_return_policy: NOT ELIGIBLE (changed_mind, digital_goods category non-returnable)",
+              "[decision] POL-REF-03 forbids refunds for digital goods",
+              "[decision] order ORD-1008 is a GlobalCart Digital Gift Card, which cannot be returned regardless of reason or VIP status",
+              "[decision] no refund processed"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "REJECTED",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Avi, thank you for contacting us about order ORD-1008. I understand you'd like to return the GlobalCart Digital Gift Card ($29.99). Unfortunately, digital gift cards are non-returnable items and cannot be refunded, regardless of the reason. This is outlined in our return policy to protect both our customers and our digital product inventory. Since the order has already been delivered, the next step would be to use or gift the card to someone else. If you have any questions about how to use or transfer your gift card, please let us know and we'll be happy to help."
+          }
+        },
+        "elapsed_s": 21.1
+      }
+    ],
+    "5a": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "AUTO_REFUND_APPROVED",
+          "refund_status": "APPROVED",
+          "blocked_by": [],
+          "claimed_decision": "AUTO_REFUND_APPROVED",
+          "route": null,
+          "override": null,
+          "alert": null,
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "decision.process_refund",
+            "comms.get_escalation_route"
+          ],
+          "customer_reply": "Hi Daniel, thank you for reporting the damage to your GlobalCart Electric Kettle. We've processed a refund of 48.00 USD for order ORD-1010. Your refund ID is RF-1010-4800. You should see the funds returned to your original payment method within 5-7 business days. We apologize for the inconvenience.",
+          "notes": [
+            "[triage] merited=48.0 requested=48.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1010 delivered 2026-08-01, electric kettle 48.00 USD, item condition damaged_on_arrival",
+              "[researcher] order owner USR-102 Daniel Peretz, Standard tier, account age 702 days, lifetime value 690.00 USD, no prior fraud flags, empty refund history",
+              "[researcher] audit: risk 0/100 band low, no rules triggered, does not block automatic refund",
+              "[decision] check_return_policy: ELIGIBLE (damaged_on_arrival, 4 days since delivery, within 30-day window, auto refund cap 50.00 USD)",
+              "[decision] requires_escalation: false, no fraud blocks",
+              "[decision] risk_band: low, fraud_audit does not block automatic refund",
+              "[decision] process_refund: APPROVED 48.00 USD (within cap, refund_id RF-1010-4800)",
+              "[decision] no prior refunds for this order; customer is Standard tier, low risk"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "process_refund",
+                "get_escalation_route"
+              ],
+              "decision": "AUTO_REFUND_APPROVED",
+              "refund_amount": 48.0,
+              "refund_id": "RF-1010-4800"
+            },
+            "customer_response": "Hi Daniel, thank you for reporting the damage to your GlobalCart Electric Kettle. We've processed a refund of 48.00 USD for order ORD-1010. Your refund ID is RF-1010-4800. You should see the funds returned to your original payment method within 5-7 business days. We apologize for the inconvenience."
+          }
+        },
+        "elapsed_s": 19.9
+      }
+    ],
+    "5b": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "ESCALATED_TO_HUMAN",
+          "refund_status": "ESCALATION_REQUIRED",
+          "blocked_by": [],
+          "claimed_decision": "ESCALATED_TO_HUMAN",
+          "route": "CH-SUPPORT-T2",
+          "override": null,
+          "alert": {
+            "channel": "CH-SUPPORT-T2",
+            "severity": "medium",
+            "message_ts": "20260805.243769"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "decision.process_refund",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Noa, thank you for reporting the damaged mouse from order ORD-1011. Your refund request for 52.00 USD is being reviewed by our team, and we will follow up with you directly.",
+          "notes": [
+            "[triage] merited=52.0 requested=52.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1011 delivered 2026-07-28, mouse 52.00 USD, item condition damaged_on_arrival",
+              "[researcher] order owner USR-103 Noa Bar-On, Standard tier, no prior fraud flags, 1 prior refund (wrong_item 2026-03-22)",
+              "[researcher] audit: risk 0/100 band low, no rules triggered; does not block automatic refund",
+              "[decision] check_return_policy: ELIGIBLE (damaged_on_arrival, 8 days since delivery, 22 days remaining in 30-day window)",
+              "[decision] merited amount 52.00 USD exceeds automatic refund cap of 50.00 USD per POL-REF-01 and POL-REF-02",
+              "[decision] process_refund returned ESCALATION_REQUIRED; claim must be reviewed by human operations lead",
+              "[decision] risk audit: low risk band (0/100), no fraud flags, does not block automatic refund, but amount override requires escalation"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "process_refund",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "ESCALATED_TO_HUMAN",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Noa, thank you for reporting the damaged mouse from order ORD-1011. Your refund request for 52.00 USD is being reviewed by our team, and we will follow up with you directly."
+          }
+        },
+        "elapsed_s": 23.5
+      }
+    ],
+    "6": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [
+          "blocked: comms.send_slack_alert -> DUPLICATE_ALERT"
+        ],
+        "result": {
+          "halt_reason": null,
+          "risk": "90/100 high",
+          "decision": "ESCALATED_TO_HUMAN",
+          "refund_status": "ESCALATION_REQUIRED",
+          "blocked_by": [
+            "risk_report:high",
+            "policy:escalation:POL-ESC-01,POL-ESC-02"
+          ],
+          "claimed_decision": "ESCALATED_TO_HUMAN",
+          "route": "CH-FRAUD",
+          "override": null,
+          "alert": {
+            "channel": "CH-FRAUD",
+            "severity": "critical",
+            "message_ts": "20260805.801233"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 4,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [
+            "comms.send_slack_alert({\"channel_id\": \"CH-FRAUD\", \"severity\": \"critical\", \"payload\": {\"order_id\": \"ORD-1005\", \"user_id\": \"USR-105\", \"risk_score) -> DUPLICATE_ALERT: An alert was already delivered for this case. Do not send another."
+          ],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert",
+            "comms.send_slack_alert!"
+          ],
+          "customer_reply": "רונן, אני מצטער שהטאבלט הגלובל קארט הגיע פגום. בדקנו את בקשת ההחזר שלך עבור הזמנה ORD-1005 (480.00 USD) והיא נמצאת כעת בסקירה של צוות שלנו. נחזור אליך ישירות עם עדכון בקרוב.",
+          "notes": [
+            "[triage] merited=480.0 requested=480.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1005 delivered 2026-07-31, GlobalCart Tablet Pro 11 480.00 USD, condition damaged_on_arrival",
+              "[researcher] owner USR-105 Ronen Katz, Standard tier, account age 119 days, lifetime value 1290.00 USD, 1 prior fraud flag",
+              "[researcher] refund history: 3 claims in last 60 days totaling 451.00 USD (ORD-1013 damaged 96.00, ORD-0998 missing 145.00, ORD-1001B damaged 210.00)",
+              "[researcher] shipping address changed 2026-07-29, 2 days before delivery 2026-07-31",
+              "[researcher] audit: risk 90/100 band high, rules FR-01 (repeat_refund_claims), FR-02 (last_minute_address_change), FR-04 (prior_fraud_flag), FR-05 (high_initial_fraud_score), FR-08 (refund_amount_velocity); blocks automatic refund",
+              "[decision] check_return_policy: ELIGIBLE (damaged_on_arrival, 5 days since delivery, 25 days remaining)",
+              "[decision] requires_escalation: true per POL-ESC-01 (fraud score 61 ≥ 60 threshold, 1 prior fraud flag) and POL-ESC-02 (3 refund claims in 60 days)",
+              "[decision] fraud_audit: risk score 90/100 (high band), blocks_automatic_refund: true; multiple triggers (repeat_refund_claims, last_minute_address_change, prior_fraud_flag, high_initial_fraud_score, refund_amount_velocity)",
+              "[decision] auto_refund cap 50.00 USD vs merited 480.00 USD; claim requires human security review"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "ESCALATED_TO_HUMAN",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "רונן, אני מצטער שהטאבלט הגלובל קארט הגיע פגום. בדקנו את בקשת ההחזר שלך עבור הזמנה ORD-1005 (480.00 USD) והיא נמצאת כעת בסקירה של צוות שלנו. נחזור אליך ישירות עם עדכון בקרוב."
+          }
+        },
+        "elapsed_s": 29.5
+      }
+    ],
+    "7a": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "REJECTED",
+          "refund_status": "REJECTED",
+          "blocked_by": [
+            "policy:verdict:ORDER_NOT_REFUNDABLE"
+          ],
+          "claimed_decision": "REJECTED",
+          "route": "CH-SUPPORT-T2",
+          "override": null,
+          "alert": {
+            "channel": "CH-SUPPORT-T2",
+            "severity": "medium",
+            "message_ts": "20260805.490310"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Shira, thank you for reaching out about your order ORD-1007. I understand you'd like to return the 2x GlobalCart LED Desk Lamp ($64.00 USD) due to changed mind. Unfortunately, your order is still in processing status and hasn't shipped yet. Our return policy allows refunds only after an order has been shipped or delivered. Once your order ships, we'll be happy to help you with a return. We'll send you a shipping confirmation and tracking information as soon as your order is on its way.",
+          "notes": [
+            "[triage] merited=64.0 requested=64.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1007 status processing, order date 2026-08-03, total 64.00 USD, 2x GlobalCart LED Desk Lamp (new condition)",
+              "[researcher] order owner USR-106 Shira Mizrahi, Standard tier, account age 417 days, lifetime value 320.00 USD, no prior refunds, no prior fraud flags",
+              "[researcher] audit: risk 0/100 band low, no triggered rules; does not block automatic refund",
+              "[decision] check_return_policy: ORDER_NOT_REFUNDABLE (changed_mind, order status 'processing')",
+              "[decision] POL-REF-04 requires order to be delivered or shipped before refund is allowed",
+              "[decision] order is still in processing stage; no refund can be issued at this time",
+              "[decision] risk audit shows low risk (0/100), no fraud blocks, but policy verdict is determinative"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "REJECTED",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Shira, thank you for reaching out about your order ORD-1007. I understand you'd like to return the 2x GlobalCart LED Desk Lamp ($64.00 USD) due to changed mind. Unfortunately, your order is still in processing status and hasn't shipped yet. Our return policy allows refunds only after an order has been shipped or delivered. Once your order ships, we'll be happy to help you with a return. We'll send you a shipping confirmation and tracking information as soon as your order is on its way."
+          }
+        },
+        "elapsed_s": 24.9
+      }
+    ],
+    "7b": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "REJECTED",
+          "refund_status": "REJECTED",
+          "blocked_by": [
+            "policy:verdict:ORDER_NOT_REFUNDABLE"
+          ],
+          "claimed_decision": "REJECTED",
+          "route": "CH-SUPPORT-T2",
+          "override": null,
+          "alert": {
+            "channel": "CH-SUPPORT-T2",
+            "severity": "medium",
+            "message_ts": "20260805.778364"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Lina, thank you for reaching out. I've reviewed your refund request for order ORD-1009 (210.00 USD). Unfortunately, your order was cancelled before it could be shipped, and our return policy only permits refunds for orders that have been delivered or shipped. Because your order did not reach that stage, it cannot be refunded under our current policy. If you have any questions about this decision, our support team will be in touch to assist you further.",
+          "notes": [
+            "[triage] merited=210.0 requested=210.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1009 ordered 2026-07-18, status cancelled, no delivery date recorded",
+              "[researcher] Order contains 1 Cordless Vacuum (SKU-VACU-06), unit price 210.00 USD, item condition new",
+              "[researcher] Owner USR-108 Lina Haddad, Standard tier, account age 306 days, lifetime value 505.00 USD, no prior refunds, no prior fraud flags",
+              "[researcher] Audit: risk 0/100 band low, no rules triggered, does not block automatic refund",
+              "[decision] check_return_policy: verdict ORDER_NOT_REFUNDABLE (changed_mind reason assumed; order status 'cancelled')",
+              "[decision] POL-REF-04 requires order to be delivered or shipped for refund eligibility",
+              "[decision] No delivery date recorded; order cannot be refunded under current policy",
+              "[decision] risk_report: low fraud risk (0/100), does not block automatic refund, but policy verdict is decisive",
+              "[decision] Claim ineligible; refund rejected"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "REJECTED",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Lina, thank you for reaching out. I've reviewed your refund request for order ORD-1009 (210.00 USD). Unfortunately, your order was cancelled before it could be shipped, and our return policy only permits refunds for orders that have been delivered or shipped. Because your order did not reach that stage, it cannot be refunded under our current policy. If you have any questions about this decision, our support team will be in touch to assist you further."
+          }
+        },
+        "elapsed_s": 20.1
+      }
+    ],
+    "8": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "AUTO_REFUND_APPROVED",
+          "refund_status": "APPROVED",
+          "blocked_by": [],
+          "claimed_decision": "AUTO_REFUND_APPROVED",
+          "route": null,
+          "override": null,
+          "alert": null,
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "decision.process_refund",
+            "comms.get_escalation_route"
+          ],
+          "customer_reply": "Hi Maya, I'm sorry to hear your GlobalCart Wired Earbuds arrived damaged on July 25th. I understand how frustrating that is. I've reviewed your refund request for order ORD-1001, and I'm pleased to confirm your refund of 35.00 USD has been approved and issued. Your refund ID is RF-1001-3500. You should see this credit back to your original payment method within a few business days. Thank you for your patience, and we truly appreciate your business.",
+          "notes": [
+            "[triage] merited=35.0 requested=35.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1001 delivered 2026-07-25, GlobalCart Wired Earbuds 35.00 USD, item condition damaged_on_arrival",
+              "[researcher] order owner USR-101 Maya Levi, VIP tier, no prior fraud flags, 1 refund in history (damaged_on_arrival ORD-0812 22.00 USD on 2025-11-04)",
+              "[researcher] customer demanded 999.00 USD compensation but order total was 35.00 USD",
+              "[researcher] audit: risk 0/100 band low, no rules triggered, does not block automatic refund",
+              "[researcher] ticket provides no name or customer id; customer identity unverified against order owner Maya Levi",
+              "[decision] check_return_policy: ELIGIBLE (damaged_on_arrival, 11 days since delivery, 34 days remaining in 45-day window)",
+              "[decision] risk audit: 0/100 low risk band, no fraud flags, blocks_automatic_refund false",
+              "[decision] merited_amount 35.00 USD within auto_refund_cap 75.00 USD",
+              "[decision] process_refund: APPROVED, refund_id RF-1001-3500"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "process_refund",
+                "get_escalation_route"
+              ],
+              "decision": "AUTO_REFUND_APPROVED",
+              "refund_amount": 35.0,
+              "refund_id": "RF-1001-3500"
+            },
+            "customer_response": "Hi Maya, I'm sorry to hear your GlobalCart Wired Earbuds arrived damaged on July 25th. I understand how frustrating that is. I've reviewed your refund request for order ORD-1001, and I'm pleased to confirm your refund of 35.00 USD has been approved and issued. Your refund ID is RF-1001-3500. You should see this credit back to your original payment method within a few business days. Thank you for your patience, and we truly appreciate your business."
+          }
+        },
+        "elapsed_s": 21.0
+      }
+    ],
+    "9": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": "ORDER_NOT_FOUND",
+          "risk": "unresolvable",
+          "decision": "NEEDS_MORE_INFO",
+          "refund_status": "NONE",
+          "blocked_by": [],
+          "claimed_decision": null,
+          "route": null,
+          "override": null,
+          "alert": null,
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 1,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details"
+          ],
+          "customer_reply": "Hi there, thank you for contacting us about your refund request. We weren't able to find order ORD-2222 in our system. Could you please double-check the order number and confirm it with us? Once we locate your order, we'll be happy to look into your request.",
+          "notes": [
+            "[triage] merited=None requested=0.0 prior_cases=0",
+            "[triage] halt: unresolvable (ORDER_NOT_FOUND) -> decision agent skipped"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] Order ORD-2222 not found in system: ORDER_NOT_FOUND error",
+              "[decision] [crew] unresolvable: ORDER_NOT_FOUND",
+              "[decision] The order could not be found; ask the customer to confirm the order number. No refund was considered."
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details"
+              ],
+              "decision": "NEEDS_MORE_INFO",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi there, thank you for contacting us about your refund request. We weren't able to find order ORD-2222 in our system. Could you please double-check the order number and confirm it with us? Once we locate your order, we'll be happy to look into your request."
+          }
+        },
+        "elapsed_s": 6.9
+      }
+    ],
+    "B1": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "90/100 high",
+          "decision": "ESCALATED_TO_HUMAN",
+          "refund_status": "ESCALATION_REQUIRED",
+          "blocked_by": [
+            "risk_report:high",
+            "policy:escalation:POL-ESC-01,POL-ESC-02"
+          ],
+          "claimed_decision": "ESCALATED_TO_HUMAN",
+          "route": "CH-FRAUD",
+          "override": null,
+          "alert": {
+            "channel": "CH-FRAUD",
+            "severity": "critical",
+            "message_ts": "20260805.929781"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.audit_fraud_risk",
+            "researcher.get_user_profile",
+            "decision.check_return_policy",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Ronen, I'm sorry the GlobalCart Tablet Pro 11 arrived damaged. I understand your frustration. Your refund request for order ORD-1005 ($480.00 USD) is being reviewed by our team, and we will follow up with you directly.",
+          "notes": [
+            "[triage] merited=480.0 requested=480.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1005 delivered 2026-07-31, GlobalCart Tablet Pro 11 480.00 USD, item condition damaged_on_arrival",
+              "[researcher] owner USR-105 Ronen Katz, Standard tier, 1 prior fraud flag, 3 refunds in history (451.00 USD refunded in last 60 days)",
+              "[researcher] shipping address changed 2026-07-29, 2 days before delivery",
+              "[researcher] audit: risk score 90/100 band high, triggered rules FR-01 (3 claims in 60 days), FR-02 (last-minute address change), FR-04 (prior fraud flag), FR-05 (inherited fraud score 61), FR-08 (451.00 USD velocity); blocks automatic refund",
+              "[decision] check_return_policy: ELIGIBLE (damaged_on_arrival, 5 days since delivery, within 30-day window) but requires_escalation true: fraud score 61 at/above 60 threshold (POL-ESC-01), 1 prior fraud flag (POL-ESC-01), 3 refund claims in 60 days (POL-ESC-02)",
+              "[decision] risk audit: risk score 90/100 high band, blocks_automatic_refund true per fraud audit (repeat claims FR-01, address change FR-02, prior flag FR-04, score FR-05, velocity FR-08)",
+              "[decision] auto_refund_cap 50.00 USD vs merited_amount 480.00 USD exceeds authority",
+              "[decision] no refund processed; 480.00 USD claim escalated to human for security review"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "audit_fraud_risk",
+                "get_user_profile",
+                "check_return_policy",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "ESCALATED_TO_HUMAN",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Ronen, I'm sorry the GlobalCart Tablet Pro 11 arrived damaged. I understand your frustration. Your refund request for order ORD-1005 ($480.00 USD) is being reviewed by our team, and we will follow up with you directly."
+          }
+        },
+        "elapsed_s": 23.2
+      }
+    ],
+    "B2": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "60/100 high",
+          "decision": "ESCALATED_TO_HUMAN",
+          "refund_status": "ESCALATION_REQUIRED",
+          "blocked_by": [
+            "risk_report:high"
+          ],
+          "claimed_decision": "ESCALATED_TO_HUMAN",
+          "route": "CH-FRAUD",
+          "override": null,
+          "alert": {
+            "channel": "CH-FRAUD",
+            "severity": "critical",
+            "message_ts": "20260805.525344"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Tomer, thank you for reporting that the GlobalCart UltraBook 14 from order ORD-1012 arrived incomplete. We've received your refund request for 890.00 USD and your order is within our 30-day return window. Your request is being reviewed by our team, and we will follow up with you directly.",
+          "notes": [
+            "[triage] merited=890.0 requested=890.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1012 delivered 2026-08-02, GlobalCart UltraBook 14 laptop 890.00 USD, item condition missing",
+              "[researcher] order owner USR-109 Tomer Sela, Standard tier, account created 2026-07-28 (8 days old), no prior fraud flags, no refund history, lifetime value 890.00 USD",
+              "[researcher] shipping address changed 2026-08-01, one day before delivery",
+              "[researcher] audit: risk 60/100 band high, rules FR-02, FR-03, FR-06, FR-07 triggered; blocks automatic refund and requires security channel escalation",
+              "[decision] check_return_policy: ELIGIBLE (item_missing, 3 days since delivery, 27 days remaining)",
+              "[decision] risk_report fraud_audit: risk band high (60/100), blocks_automatic_refund true (FR-02 last_minute_address_change, FR-03 new_account_high_value, FR-06 high_value_claim, FR-07 item_never_arrived_claim)",
+              "[decision] auto_refund cap 50.00 USD but claim 890.00 USD merited amount exceeds cap and fraud blocks automatic refund",
+              "[decision] no process_refund attempted; security channel escalation required"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "ESCALATED_TO_HUMAN",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Tomer, thank you for reporting that the GlobalCart UltraBook 14 from order ORD-1012 arrived incomplete. We've received your refund request for 890.00 USD and your order is within our 30-day return window. Your request is being reviewed by our team, and we will follow up with you directly."
+          }
+        },
+        "elapsed_s": 20.4
+      }
+    ],
+    "B5": [
+      {
+        "run": 1,
+        "fails": [
+          "halt_reason: expected 'USER_ORDER_MISMATCH', got 'IDENTITY_MISMATCH'"
+        ],
+        "warns": [
+          "blocked: comms.get_escalation_route -> ARGUMENT_MISMATCH",
+          "crew backstop: researcher.get_user_profile was run by code, not by the model"
+        ],
+        "result": {
+          "halt_reason": "IDENTITY_MISMATCH",
+          "risk": "0/100 low",
+          "decision": "ESCALATED_TO_HUMAN",
+          "refund_status": "NONE",
+          "blocked_by": [],
+          "claimed_decision": null,
+          "route": "CH-FRAUD",
+          "override": null,
+          "alert": {
+            "channel": "CH-FRAUD",
+            "severity": "critical",
+            "message_ts": "20260805.025629"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 4,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [
+            "comms.get_escalation_route({\"risk_band\": \"n/a\", \"requested_amount\": 35.0, \"prior_fraud_flags\": 0, \"order_status\": \"delivered\", \"verdict\": \"ELIGIBLE) -> ARGUMENT_MISMATCH: Route with the facts from the reports, not from memory. Corrections: {\"risk_band\": {\"given\": \"n/a\", \"expected\": \"low\"}, \"prior_fraud_flags\": {\"given\": 0, \"expected\": 1}}"
+          ],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "researcher.get_user_profile@crew",
+            "comms.get_escalation_route!",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Ronen,\n\nThank you for reaching out about order ORD-1001 (GlobalCart Wired Earbuds, $35.00 USD).\n\nWe received your refund request and are reviewing it. However, we were unable to match this order to the account details you provided. Your request is being reviewed by our team, and we will follow up with you directly.\n\nBest regards,\nGlobalCart Support",
+          "notes": [
+            "[researcher] owner profile was not read by the model; the crew read it (tool-log step 0)",
+            "[triage] merited=35.0 requested=35.0 prior_cases=0",
+            "[triage] halt: identity_mismatch (IDENTITY_MISMATCH) -> decision agent skipped"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1001 is owned by USR-101, but customer claims to be USR-105 (Ronen Katz) - identity mismatch",
+              "[researcher] ORD-1001 delivered 2026-07-25, wired earbuds 35.00 USD, item condition damaged_on_arrival",
+              "[researcher] Audit performed on actual owner USR-101: risk 0/100 band low, no triggered rules, allows automatic refund",
+              "[decision] [crew] identity_mismatch: IDENTITY_MISMATCH",
+              "[decision] Say the request for this order is under review by our team and we will follow up. You may say the order could not be matched to the account details provided. Never mention fraud, flags, or why the case is reviewed."
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "ESCALATED_TO_HUMAN",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Ronen,\n\nThank you for reaching out about order ORD-1001 (GlobalCart Wired Earbuds, $35.00 USD).\n\nWe received your refund request and are reviewing it. However, we were unable to match this order to the account details you provided. Your request is being reviewed by our team, and we will follow up with you directly.\n\nBest regards,\nGlobalCart Support"
+          }
+        },
+        "elapsed_s": 19.5
+      }
+    ],
+    "B5N": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": "IDENTITY_MISMATCH",
+          "risk": "0/100 low",
+          "decision": "ESCALATED_TO_HUMAN",
+          "refund_status": "NONE",
+          "blocked_by": [],
+          "claimed_decision": null,
+          "route": "CH-FRAUD",
+          "override": "crew policy: IDENTITY_MISMATCH -> CH-FRAUD (router matched nothing)",
+          "alert": {
+            "channel": "CH-FRAUD",
+            "severity": "critical",
+            "message_ts": "20260805.596157"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Ronen, thank you for contacting us about order ORD-1001. Your refund request for the damaged GlobalCart Wired Earbuds (35.00 USD) is being reviewed by our team. We weren't able to match this order to the account details provided, so we need to verify some information. We will follow up with you directly.",
+          "notes": [
+            "[triage] merited=35.0 requested=35.0 prior_cases=0",
+            "[triage] halt: identity_mismatch (IDENTITY_MISMATCH) -> decision agent skipped",
+            "crew policy: IDENTITY_MISMATCH -> CH-FRAUD (router matched nothing)"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1001 delivered 2026-07-25, wired earbuds 35.00 USD, item condition damaged_on_arrival",
+              "[researcher] order owner is USR-101 Maya Levi, VIP tier, account created 2023-03-11, 1 prior refund for damaged_on_arrival in history",
+              "[researcher] ticket claims name Ronen Katz but order belongs to Maya Levi - identity mismatch",
+              "[researcher] audit: risk 0/100 band low, no triggered rules, permits automatic refund",
+              "[decision] [crew] identity_mismatch: IDENTITY_MISMATCH",
+              "[decision] Say the request for this order is under review by our team and we will follow up. You may say the order could not be matched to the account details provided. Never mention fraud, flags, or why the case is reviewed."
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "ESCALATED_TO_HUMAN",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Ronen, thank you for contacting us about order ORD-1001. Your refund request for the damaged GlobalCart Wired Earbuds (35.00 USD) is being reviewed by our team. We weren't able to match this order to the account details provided, so we need to verify some information. We will follow up with you directly."
+          }
+        },
+        "elapsed_s": 15.0
+      }
+    ],
+    "LOG": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "REJECTED",
+          "refund_status": "REJECTED",
+          "blocked_by": [
+            "policy:verdict:ORDER_NOT_REFUNDABLE"
+          ],
+          "claimed_decision": "REJECTED",
+          "route": "CH-LOGISTICS",
+          "override": null,
+          "alert": {
+            "channel": "CH-LOGISTICS",
+            "severity": "low",
+            "message_ts": "20260805.216596"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Yossi, thank you for reaching out. We can see that your order ORD-1004 for the Standing Desk Riser (78.90 USD) is currently delayed and hasn't shipped yet. We're actively chasing the carrier to get this moving and will update you as soon as we have new information about your delivery. We appreciate your patience.",
+          "notes": [
+            "[triage] merited=78.9 requested=0.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1004 status delayed, order date 2026-07-29, delivery date not yet set, Standing Desk Riser 78.90 USD",
+              "[researcher] Owner USR-104 Yossi Adler, Standard tier, account age 797 days, lifetime value 1130.00 USD, no prior fraud flags",
+              "[researcher] Refund history: 1 prior refund for late_delivery on ORD-0740 (31.00 USD, 2025-08-15)",
+              "[researcher] Audit: risk 0/100 band low, no triggered rules, does not block automatic refund, no security channel required",
+              "[decision] Assumed reason: late_delivery (order status delayed, customer history frustrated by shipping delays)",
+              "[decision] check_return_policy verdict: NOT ELIGIBLE - ORDER_NOT_REFUNDABLE",
+              "[decision] Policy POL-REF-04 requires order to be delivered or shipped; this order status is 'delayed' with delivery_date null",
+              "[decision] Fraud audit: low risk band (0/100), does not block automatic refund",
+              "[decision] No refund processed; claim ineligible under policy"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "REJECTED",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Yossi, thank you for reaching out. We can see that your order ORD-1004 for the Standing Desk Riser (78.90 USD) is currently delayed and hasn't shipped yet. We're actively chasing the carrier to get this moving and will update you as soon as we have new information about your delivery. We appreciate your patience."
+          }
+        },
+        "elapsed_s": 20.6
+      }
+    ],
+    "MED": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "40/100 medium",
+          "decision": "ESCALATED_TO_HUMAN",
+          "refund_status": "ESCALATION_REQUIRED",
+          "blocked_by": [],
+          "claimed_decision": "ESCALATED_TO_HUMAN",
+          "route": "CH-FINANCE",
+          "override": null,
+          "alert": {
+            "channel": "CH-FINANCE",
+            "severity": "high",
+            "message_ts": "20260828.254713"
+          },
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "decision.check_return_policy",
+            "decision.process_refund",
+            "comms.get_escalation_route",
+            "comms.send_slack_alert"
+          ],
+          "customer_reply": "Hi Tomer, thank you for reaching out about your order ORD-1012. I understand you're missing the GlobalCart UltraBook 14 (890.00 USD) from your delivery on August 2nd. Your refund request is being reviewed by our team, and we will follow up with you directly.",
+          "notes": [
+            "[triage] merited=890.0 requested=890.0 prior_cases=0"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1012 delivered 2026-08-02, GlobalCart UltraBook 14 890.00 USD, item condition missing",
+              "[researcher] owner USR-109 Tomer Sela, Standard tier, account created 2026-07-28 (31 days old), lifetime value 890.00 USD, no prior fraud flags, no refund history",
+              "[researcher] shipping address changed 2026-08-01, 1 day before delivery to Bat Yam, IL",
+              "[researcher] audit: risk 40/100 band medium, rules FR-02 (last_minute_address_change), FR-06 (high_value_claim), FR-07 (item_never_arrived_claim); does not block automatic refund",
+              "[decision] check_return_policy: ELIGIBLE (item_missing, 26 days since delivery, within 30-day window); no escalation flags in policy",
+              "[decision] fraud_audit: 40/100 medium risk band, does not block automatic refund",
+              "[decision] process_refund: requested 890.00 USD exceeds automatic refund cap 50.00 USD per POL-REF-01/POL-REF-02",
+              "[decision] full merited amount 890.00 USD must be reviewed and approved by human operations lead"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "check_return_policy",
+                "process_refund",
+                "get_escalation_route",
+                "send_slack_alert"
+              ],
+              "decision": "ESCALATED_TO_HUMAN",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Tomer, thank you for reaching out about your order ORD-1012. I understand you're missing the GlobalCart UltraBook 14 (890.00 USD) from your delivery on August 2nd. Your refund request is being reviewed by our team, and we will follow up with you directly."
+          }
+        },
+        "elapsed_s": 26.8
+      }
+    ],
+    "DUP": [
+      {
+        "run": 1,
+        "fails": [],
+        "warns": [],
+        "result": {
+          "halt_reason": null,
+          "risk": "0/100 low",
+          "decision": "REJECTED",
+          "refund_status": "REJECTED",
+          "blocked_by": [
+            "memory:DUPLICATE_CLAIM:RF-1001-3500"
+          ],
+          "claimed_decision": "REJECTED",
+          "route": null,
+          "override": null,
+          "alert": null,
+          "fallback_used": false,
+          "agents": [
+            {
+              "agent": "researcher",
+              "steps": 3,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "decision",
+              "steps": 1,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            },
+            {
+              "agent": "comms",
+              "steps": 2,
+              "retries": 0,
+              "error": null,
+              "honest": true,
+              "retry_details": [],
+              "anomalies": []
+            }
+          ],
+          "blocked": [],
+          "tools": [
+            "researcher.get_order_details",
+            "researcher.get_user_profile",
+            "researcher.audit_fraud_risk",
+            "comms.get_escalation_route"
+          ],
+          "customer_reply": "Hi Maya, thank you for reaching out. We reviewed your refund request for order ORD-1001 (GlobalCart Wired Earbuds, 35.00 USD). We found that a refund has already been issued for this order. Your refund ID is RF-1001-3500, approved on August 29, 2026. If you have not yet received the refund in your account, please allow 3-5 business days for it to appear. If you have any other questions, we're here to help.",
+          "notes": [
+            "[triage] merited=35.0 requested=35.0 prior_cases=1"
+          ],
+          "part_a_view": {
+            "reasoning_chain": [
+              "[researcher] ORD-1001 delivered 2026-07-25, GlobalCart Wired Earbuds 35.00 USD, item condition damaged_on_arrival",
+              "[researcher] owner USR-101 Maya Levi, VIP tier, account created 2023-03-11, lifetime value 4820.50 USD, 37 orders, 0 prior fraud flags",
+              "[researcher] 1 prior refund on 2025-11-04 for damaged_on_arrival damage, 22.00 USD",
+              "[researcher] audit: risk 0/100 band low, no triggered rules, does not block automatic refund",
+              "[researcher] address not changed after order placement, no claims in last 60 days",
+              "[decision] check_return_policy not called: prior_cases shows ORD-1001 already has an APPROVED refund (RF-1001-3500, 35.00 USD, decision AUTO_REFUND_APPROVED on 2026-08-29)",
+              "[decision] procedure rule: prior_cases contains an APPROVED refund for this same order → REJECTED (already refunded)",
+              "[decision] no refund attempted; this is a duplicate claim"
+            ],
+            "action_taken": {
+              "tools_called": [
+                "get_order_details",
+                "get_user_profile",
+                "audit_fraud_risk",
+                "get_escalation_route"
+              ],
+              "decision": "REJECTED",
+              "refund_amount": 0.0,
+              "refund_id": null
+            },
+            "customer_response": "Hi Maya, thank you for reaching out. We reviewed your refund request for order ORD-1001 (GlobalCart Wired Earbuds, 35.00 USD). We found that a refund has already been issued for this order. Your refund ID is RF-1001-3500, approved on August 29, 2026. If you have not yet received the refund in your account, please allow 3-5 business days for it to appear. If you have any other questions, we're here to help."
+          }
+        },
+        "elapsed_s": 34.7
+      }
+    ]
+  }
+}

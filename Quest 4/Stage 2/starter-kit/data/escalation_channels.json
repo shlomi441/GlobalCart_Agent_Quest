@@ -1,0 +1,66 @@
+{
+  "_comment": "GlobalCart escalation routing table (mock). Read-only fixture for Quest #04 Part B. Do not edit.",
+  "version": "1.0.0",
+  "_routing_note": "get_escalation_route() evaluates channels in ascending 'priority' order and returns the first match. Lower priority number wins.",
+  "channels": [
+    {
+      "channel_id": "CH-FRAUD",
+      "name": "#fraud-security",
+      "owner_team": "Trust & Safety",
+      "severity": "critical",
+      "priority": 1,
+      "response_sla_minutes": 15,
+      "trigger_conditions": [
+        "risk_band == 'high'",
+        "prior_fraud_flags > 0",
+        "FR-02 and FR-03 triggered together"
+      ],
+      "template": "🚨 FRAUD REVIEW — order {order_id} / customer {user_id}\nRisk score: {risk_score}/100 ({risk_band})\nTriggered rules: {triggered_rules}\nRequested amount: {requested_amount} USD\nRecommended action: hold payout, manual identity verification.\nEvidence: {evidence}"
+    },
+    {
+      "channel_id": "CH-FINANCE",
+      "name": "#finance-approvals",
+      "owner_team": "Finance Operations",
+      "severity": "high",
+      "priority": 2,
+      "response_sla_minutes": 120,
+      "trigger_conditions": [
+        "requested_amount >= 250",
+        "requested_amount > auto_refund_cap and risk_band != 'high'"
+      ],
+      "template": "💳 REFUND APPROVAL NEEDED — order {order_id} / customer {user_id}\nRequested amount: {requested_amount} USD (cap: {auto_refund_cap} USD)\nRisk: {risk_score}/100 ({risk_band})\nPolicy basis: {applicable_policies}\nRecommended action: approve or decline the payout."
+    },
+    {
+      "channel_id": "CH-SUPPORT-T2",
+      "name": "#support-tier2",
+      "owner_team": "Customer Support Tier 2",
+      "severity": "medium",
+      "priority": 3,
+      "response_sla_minutes": 240,
+      "trigger_conditions": [
+        "requested_amount > auto_refund_cap",
+        "claim rejected and customer sentiment is negative",
+        "policy verdict is NON_RETURNABLE_CATEGORY"
+      ],
+      "template": "🙋 TIER 2 HANDOFF — order {order_id} / customer {user_id}\nVerdict: {verdict}\nRequested amount: {requested_amount} USD\nRisk: {risk_score}/100 ({risk_band})\nWhy escalated: {escalation_reason}\nRecommended action: human review of the customer reply before it is sent."
+    },
+    {
+      "channel_id": "CH-LOGISTICS",
+      "name": "#logistics-delays",
+      "owner_team": "Supply Chain",
+      "severity": "low",
+      "priority": 4,
+      "response_sla_minutes": 480,
+      "trigger_conditions": [
+        "order status is 'delayed' or 'processing'",
+        "no refund is being requested"
+      ],
+      "template": "📦 SHIPMENT ISSUE — order {order_id} / customer {user_id}\nStatus: {order_status}\nOrdered: {order_date}\nRecommended action: chase the carrier and update the customer."
+    }
+  ],
+  "severity_levels": ["low", "medium", "high", "critical"],
+  "outbox": {
+    "path": "outbox/alerts.jsonl",
+    "_note": "send_slack_alert() appends one JSON object per line here. Set the SLACK_WEBHOOK_URL environment variable to post to a real Slack incoming webhook instead — offline is the default so that nobody needs a workspace to finish the quest."
+  }
+}

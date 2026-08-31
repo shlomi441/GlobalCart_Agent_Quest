@@ -1,0 +1,22 @@
+run ad9e6e1a  halt=None
+
+[researcher] steps=3 retries=0 error=None honest=True
+      s1 get_order_details({"order_id": "ORD-1005"}) -> delivered
+      s2 get_user_profile({"user_id": "USR-105"}) -> ok
+      s2 audit_fraud_risk({"order_id": "ORD-1005"}) -> ok
+[decision] steps=2 retries=0 error=None honest=True
+      s1 check_return_policy({"order_id": "ORD-1005", "reason": "damaged_on_arrival"}) -> ELIGIBLE
+[comms] steps=3 retries=0 error=None honest=True
+      s1 get_escalation_route({"risk_band": "high", "requested_amount": 480.0, "prior_fraud_flags": 1, "order_status": ") -> CH-FRAUD
+      s2 send_slack_alert({"channel_id": "CH-FRAUD", "severity": "critical", "payload": {"order_id": "ORD-1005", "us) -> CH-FRAUD
+
+risk report : complete 90/100 high ['FR-01', 'FR-02', 'FR-04', 'FR-05', 'FR-08']
+decision    : ESCALATED_TO_HUMAN refund_status=ESCALATION_REQUIRED attempted=False blocked_by=['risk_report:high', 'policy:escalation:POL-ESC-01,POL-ESC-02'] merited=480.0 claimed=ESCALATED_TO_HUMAN
+route       : CH-FRAUD
+alert       : CH-FRAUD critical ts=20260805.460381 transport=outbox+webhook
+
+customer reply:
+Hi Ronen, I understand your frustration with the damaged tablet. Thank you for letting us know. Your refund request for order ORD-1005 (480.00 USD) is being reviewed by our team, and we will follow up with you directly.
+
+notes:
+  - [triage] merited=480.0 requested=480.0 prior_cases=0
